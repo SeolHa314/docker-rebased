@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: docker.io/postgres:15.6-alpine
+    container_name: rebased_db
+    restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "pleroma"]
+    environment:
+      POSTGRES_USER: pleroma
+      POSTGRES_PASSWORD: ChangeMe!
+      POSTGRES_DB: pleroma
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  web:
+    image: seolha314/rebased
+    container_name: rebased_web
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget -q --spider --proxy=off localhost:4000 || exit 1",
+        ]
+    restart: always
+    ports:
+      - '4000:4000'
+    build:
+      context: .
+    volumes:
+      - ./data/uploads:/data/uploads
+      - ./data/static:/data/static
+      - ./config.exs:/data/config.exs
+    environment:
+      PUID: 998
+      PGID: 998
+      DOMAIN: localhost
+      INSTANCE_NAME: Pleroma
+      ADMIN_EMAIL: admin@example.com
+      NOTIFY_EMAIL: notify@example.com
+      DB_USER: pleroma
+      DB_PASS: ChangeMe!
+      DB_NAME: pleroma
+    depends_on:
+      - db
