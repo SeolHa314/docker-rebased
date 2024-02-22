@@ -20,6 +20,10 @@ RUN mix local.hex --force && \
 
 FROM docker.io/elixir:1.14-otp-26-alpine as runner
 
+LABEL org.opencontainers.image.source=https://github.com/SeolHa314/docker-rebased
+LABEL org.opencontainers.image.description="Unofficial Rebased image for containers"
+LABEL org.opencontainers.image.licenses="AGPL-3.0"
+
 ARG UID=1004
 ARG GID=1004
 ENV MIX_ENV=prod
