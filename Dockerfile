@@ -53,5 +53,6 @@ USER pleroma
 COPY --from=build --chown=pleroma:pleroma /rebased/release /pleroma
 COPY --chown=pleroma config.exs /etc/pleroma/config.exs
 RUN chmod o= /etc/pleroma/config.exs
+RUN chmod g-w /etc/pleroma/config.exs
 
 ENTRYPOINT [ "/pleroma/docker-start.sh" ]
