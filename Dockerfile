@@ -1,6 +1,6 @@
 FROM docker.io/elixir:1.14-otp-26-alpine as build
 
-ARG REBASED_VERSION=main
+ARG REBASED_VERSION=develop
 ENV MIX_ENV=prod
 
 # git curl build-essential postgresql postgresql-contrib cmake libmagic-dev imagemagick ffmpeg libimage-exiftool-perl nginx certbot unzip libssl-dev automake autoconf libncurses5-dev fasttext
