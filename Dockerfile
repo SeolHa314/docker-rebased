@@ -8,7 +8,7 @@ RUN apk add --no-cache git gcc g++ musl-dev make cmake file-dev ncurses-dev post
         imagemagick libmagic ffmpeg exiftool automake autoconf libressl-dev
 
 WORKDIR /rebased
-RUN git clone --no-checkout https://github.com/SeolHa314/docker-rebased . && \
+RUN git clone --no-checkout https://github.com/SeolHa314/rebased . && \
     git checkout ${REBASED_VERSION}
 
 RUN mix local.hex --force && \
